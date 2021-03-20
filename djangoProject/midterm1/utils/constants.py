@@ -7,3 +7,10 @@ Type_ROLES = (
     (Type_Bullet, 'Bullet'),
     (Type_Sport, 'Sport'),
     (Type_Travel, 'travel'),)
+
+Role_SuperAdmin = 1
+Role_Guest = 2
+Roles = (
+    (Role_SuperAdmin, "Super admin"),
+    (Role_Guest, "Guest")
+)

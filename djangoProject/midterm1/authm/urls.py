@@ -5,5 +5,5 @@ from authm.views import something
 
 urlpatterns = [
     path('login', obtain_jwt_token),
-    path('something', something)
+    # path('something', something)
 ]

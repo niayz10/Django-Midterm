@@ -27,6 +27,9 @@ class BookViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
     def create(self, request):
+        if request.user.role == "Guest":
+            return Response({}, status=status.HTTP_400_BAD_REQUEST)
+
         book = Book.objects.create(name=request.data.get('name'),
                                    price=request.data.get('price'),
                                    description=request.data.get('description'),
@@ -37,6 +40,8 @@ class BookViewSet(viewsets.ViewSet):
         return Response({}, status=status.HTTP_201_CREATED)
 
     def update(self, request, id):
+        if request.user.role == "Guest":
+            return Response({}, status=status.HTTP_400_BAD_REQUEST)
         book = Book.objects.get(id=id)
         book.name = request.data.get('name')
         book.price = request.data.get('price')
@@ -48,6 +53,8 @@ class BookViewSet(viewsets.ViewSet):
         return Response({}, status=status.HTTP_200_OK)
 
     def destroy(self, request, id):
+        if request.user.role == "Guest":
+            return Response({}, status=status.HTTP_400_BAD_REQUEST)
         book = Book.objects.get(id=id)
         book.delete()
         return Response({}, status=status.HTTP_200_OK)
@@ -68,6 +75,8 @@ class JournalViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
     def create(self, request):
+        if request.user.role == "Guest":
+            return Response({}, status=status.HTTP_400_BAD_REQUEST)
         journal = Journal.objects.create(name=request.data.get('name'),
                                          price=request.data.get('price'),
                                          description=request.data.get('description'),
@@ -78,6 +87,8 @@ class JournalViewSet(viewsets.ViewSet):
         return Response({}, status=status.HTTP_201_CREATED)
 
     def update(self, request, id):
+        if request.user.role == "Guest":
+            return Response({}, status=status.HTTP_400_BAD_REQUEST)
         journal = Journal.objects.get(id=id)
         journal.name = request.data.get('name')
         journal.price = request.data.get('price')
@@ -89,6 +100,8 @@ class JournalViewSet(viewsets.ViewSet):
         return Response({}, status=status.HTTP_200_OK)
 
     def destroy(self, request, id):
+        if request.user.role == "Guest":
+            return Response({}, status=status.HTTP_400_BAD_REQUEST)
         journal = Journal.objects.get(id=id)
         journal.delete()
         return Response({}, status=status.HTTP_200_OK)
