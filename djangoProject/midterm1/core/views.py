@@ -15,6 +15,11 @@ from core.serializers import BookSerializer, JournalSerializer
 class BookViewSet(viewsets.ViewSet):
     permission_classes = (IsAuthenticated,)
 
+    def book_list(self, request):
+        list = Book.objects.all()
+        serializer = BookSerializer(list, many=True)
+        return Response(serializer.data)
+
     def retrieve(self, request, id):
         queryset = Book.objects.all()
         task = get_object_or_404(queryset, id=id)
@@ -50,6 +55,11 @@ class BookViewSet(viewsets.ViewSet):
 
 class JournalViewSet(viewsets.ViewSet):
     permission_classes = (IsAuthenticated,)
+
+    def journal_list(self, request):
+        list = Journal.objects.all()
+        serializer = JournalSerializer(list, many=True)
+        return Response(serializer.data)
 
     def retrieve(self, request, id):
         queryset = Journal.objects.all()
